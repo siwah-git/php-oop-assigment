@@ -14,15 +14,15 @@ This project showcases fundamental principles of **Object-Oriented Programming (
 2.  **Open your terminal** and navigate to the project directory.
 3.  **Run the application** using the built-in PHP development server:
 
-    ```bash
+    
     php -S localhost:8000
-    ```
+
 
 4.  Open your browser and visit `http://localhost:8000` to see the output.
 5.  Alternatively, you can run it directly from the command line:
 
-    ```bash
+    
     php index.php
-    ```
+   
 
 The result will be displayed directly in your terminal.
