@@ -46,3 +46,27 @@ $orderRepo->createOrder("Siwah", 200000);
 $orderRepo->createOrder("Sinta", 300000);
 echo "Total Orders: " . $orderRepo->getTotalOrders() . PHP_EOL;
 echo "Average Order Value: Rp " . number_format($orderRepo->getAverageOrderValue(), 0, ',', '.') . PHP_EOL;
+
+echo "\n=== Basic FizzBuzz ===\n";
+$fizzbuzz = new FizzBuzz(15, "foo", "bar");
+print_r($fizzbuzz->run());
+
+echo "\n=== Word Counter ===\n";
+try {
+    $counter = new WordCounter ("data/sample.txt");
+    echo "jumlah kata : " . $counter->countWords() . PHP_EOL;
+    echo "kata yang paling banyak muncul : " .$counter->mostFrequentWord() . PHP_EOL;
+} catch (Exception $e) {
+    echo "ERROR : " . $e->getMessage(); //akan muncul pesan eror jika gagal memuat data
+}
+
+echo "\n=== Word Counter ===\n";
+$shapes = [
+    new Box(5),
+    new Triangle(6, 7),
+    new Circle (9)
+];
+
+foreach ($shapes as $shape){
+    echo get_class($shape). "luas: ". $shape->getArea(). "\n";
+}

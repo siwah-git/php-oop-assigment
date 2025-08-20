@@ -1,5 +1,5 @@
 <?php
- abstract class PlanatShapes {
+ abstract class PlannerShapes {
     abstract public function getArea();
  }
 ?>

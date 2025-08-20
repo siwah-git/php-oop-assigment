@@ -1,13 +1,13 @@
 <?php
 
-require_once "PlanarShapes.php";
+require_once "PlannerShapes.php";
 
-class Triangle extends PlanarShapes{
+class Triangle extends PlannerShapes{
     private $alas;
     private $tinggi;
 
 
-    public function __construct($radius){
+    public function __construct($alas, $tinggi){
         $this->alas = $alas;
         $this->tinggi = $tinggi;
     } 

@@ -1,7 +1,7 @@
 <?php
- require_once "PlanarShapes.php";
+ require_once "PlannerShapes.php";
 
- class Box extends PlanarShapes {
+ class Box extends PlannerShapes{
     private $sisi;
 
     public function __construct ($sisi) {
