@@ -31,5 +31,4 @@ class PrimeGenerator {
 }
 
 $prime = new PrimeGenerator(20);
-print_r($prime->generate())
 ?>
