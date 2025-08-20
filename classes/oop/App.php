@@ -1,37 +1,33 @@
 <?php
-
-declare(strict_types=1);
-require_once 'Logger.php';
-
 /**
  * Class App
- * 
- * Aplikasi yang menerima logger sebagai dependency.
+ * Represents the main application logic, using a logger dependency.
+ *
+ * @package Classes\OOP
+ *
  */
-class App
-{
+class App {
     /**
-     * @var Logger Logger yang digunakan
+     * @var Logger The logger instance to be used by the application.
      */
     private Logger $logger;
 
     /**
      * App constructor.
      *
-     * @param Logger $logger Objek turunan dari Logger
+     * @param Logger $logger An instance of a class that inherits from Logger.
      */
-    public function __construct(Logger $logger)
-    {
+    public function __construct(Logger $logger) {
         $this->logger = $logger;
     }
 
     /**
-     * Menjalankan aplikasi.
+     * Runs the main application process.
      *
+     * @param string $message A message to be logged.
      * @return void
      */
-    public function run(): void
-    {
-        $this->logger->log("Aplikasi berjalan...");
+    public function run(string $message): void {
+        $this->logger->log($message);
     }
 }

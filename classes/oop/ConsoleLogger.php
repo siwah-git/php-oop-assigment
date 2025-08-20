@@ -1,23 +1,19 @@
 <?php
-
-declare(strict_types=1);
-require_once 'Logger.php';
-
 /**
  * Class ConsoleLogger
- * 
- * Menampilkan pesan log ke layar (output).
+ * A concrete class for logging messages to the console (standard output).
+ *
+ * @package Classes\OOP
+ *
  */
-class ConsoleLogger extends Logger
-{
+class ConsoleLogger extends Logger {
     /**
-     * Menampilkan pesan ke output.
+     * Logs a message to the console.
      *
-     * @param string $message Pesan log
+     * @param string $message The message to be logged.
      * @return void
      */
-    public function log(string $message): void
-    {
-        echo $message . PHP_EOL;
+    public function log(string $message): void {
+        echo "[LOG] " . $message . PHP_EOL;
     }
 }

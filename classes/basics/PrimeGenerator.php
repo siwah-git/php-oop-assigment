@@ -1,65 +1,56 @@
 <?php
-
-declare(strict_types=1);
-
 /**
  * Class PrimeGenerator
- * 
- * Menghasilkan bilangan prima hingga nilai batas tertentu.
+ * Generates and checks for prime numbers up to a given limit.
+ *
+ * @package Classes\Basics
+ *
  */
-class PrimeGenerator
-{
+class PrimeGenerator {
     /**
-     * @var int Batas maksimum bilangan prima
+     * @var int The upper limit for prime number generation.
      */
     private int $limit;
 
     /**
      * PrimeGenerator constructor.
      *
-     * @param int $limit Batas atas untuk mencari bilangan prima
+     * @param int $limit The number to set as the upper limit.
      */
-    public function __construct(int $limit)
-    {
+    public function __construct(int $limit) {
         $this->limit = $limit;
     }
 
     /**
-     * Menghasilkan array bilangan prima hingga batas.
+     * Checks if a number is a prime number.
      *
-     * @return int[] Array bilangan prima
+     * @param int $number The number to check.
+     * @return bool True if the number is prime, false otherwise.
      */
-    public function generate(): array
-    {
-        $primes = [];
-
-        for ($i = 2; $i <= $this->limit; $i++) {
-            if ($this->isPrime($i)) {
-                $primes[] = $i;
-            }
-        }
-
-        return $primes;
-    }
-
-    /**
-     * Mengecek apakah sebuah bilangan adalah bilangan prima.
-     *
-     * @param int $number Angka yang akan dicek
-     * @return bool True jika prima, false jika tidak
-     */
-    public function isPrime(int $number): bool
-    {
-        if ($number < 2) {
+    public function isPrime(int $number): bool {
+        if ($number <= 1) {
             return false;
         }
-
         for ($i = 2; $i <= sqrt($number); $i++) {
             if ($number % $i === 0) {
                 return false;
             }
         }
-
         return true;
+    }
+
+    /**
+     * Generates an array of all prime numbers up to the set limit.
+     *
+     * @return array An array containing all prime numbers.
+     */
+    public function generate(): array {
+        $primes = [];
+        for ($i = 2; $i <= $this->limit; $i++) {
+            if ($this->isPrime($i)) {
+                $primes[] = $i;
+            }
+        }
+        return $primes;
     }
 }

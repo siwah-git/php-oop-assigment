@@ -1,63 +1,59 @@
 <?php
-
-declare(strict_types=1);
-require_once 'Database.php';
-
 /**
  * Class OrderRepository
- * 
- * Mengelola data orders dari database.
+ * Handles data access logic for orders.
+ * This is a simulation, as no real database connection is established.
+ *
+ * @package Classes\Database
+ *
  */
-class OrderRepository
-{
+class OrderRepository {
     /**
-     * @var \PDO
+     * @var array An array to simulate a database table for orders.
      */
-    private \PDO $db;
+    private array $orders = [];
 
     /**
-     * OrderRepository constructor.
-     */
-    public function __construct()
-    {
-        $this->db = Database::getConnection();
-    }
-
-    /**
-     * Menambahkan order baru.
+     * Creates a new order entry.
      *
-     * @param string $customer Nama customer
-     * @param float $total Total harga
+     * @param string $customer The customer's name.
+     * @param float $total The total price of the order.
      * @return void
      */
-    public function createOrder(string $customer, float $total): void
-    {
-        $stmt = $this->db->prepare("INSERT INTO orders (customer_name, total_price) VALUES (:customer, :total)");
-        $stmt->execute([
-            ':customer' => $customer,
-            ':total' => $total
-        ]);
+    public function createOrder(string $customer, float $total): void {
+        $id = count($this->orders) + 1;
+        $this->orders[] = [
+            'id' => $id,
+            'customer_name' => $customer,
+            'total_price' => $total,
+        ];
+        echo "Order created for {$customer} with ID {$id}." . PHP_EOL;
     }
 
     /**
-     * Menghitung total jumlah order.
+     * Calculates the total number of orders.
      *
-     * @return int Jumlah order
+     * @return int The total count of orders.
      */
-    public function getTotalOrders(): int
-    {
-        $result = $this->db->query("SELECT COUNT(*) FROM orders")->fetchColumn();
-        return (int) $result;
+    public function getTotalOrders(): int {
+        return count($this->orders);
     }
 
     /**
-     * Menghitung rata-rata total_price.
+     * Calculates the average value of all orders.
      *
-     * @return float Rata-rata nilai order
+     * @return float The average order value.
      */
-    public function getAverageOrderValue(): float
-    {
-        $result = $this->db->query("SELECT AVG(total_price) FROM orders")->fetchColumn();
-        return $result !== null ? (float) $result : 0.0;
+    public function getAverageOrderValue(): float {
+        if (empty($this->orders)) {
+            return 0.0;
+        }
+
+        $totalPrice = 0.0;
+        foreach ($this->orders as $order) {
+            $totalPrice += $order['total_price'];
+        }
+
+        return $totalPrice / count($this->orders);
     }
 }
