@@ -5,12 +5,12 @@ declare(strict_types=1);
 /**
  * Class Database
  * 
- * Singleton untuk koneksi SQLite.
+ * Singleton untuk koneksi MySQL.
  */
 class Database
 {
     /**
-     * @var \PDO
+     * @var \PDO|null
      */
     private static ?\PDO $connection = null;
 
@@ -22,11 +22,22 @@ class Database
     public static function getConnection(): \PDO
     {
         if (self::$connection === null) {
-            self::$connection = new \PDO('sqlite:data/orders.db');
-            self::$connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            $host = 'localhost';
+            $dbname = 'oop_assignment'; // pastikan sudah dibuat
+            $username = 'root';         // sesuaikan
+            $password = '';             // sesuaikan
 
-            // Buat tabel jika belum ada
-            self::initSchema();
+            $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8mb4";
+
+            try {
+                self::$connection = new \PDO($dsn, $username, $password);
+                self::$connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+
+                // Buat tabel jika belum ada
+                self::initSchema();
+            } catch (\PDOException $e) {
+                die("Koneksi database gagal: " . $e->getMessage());
+            }
         }
 
         return self::$connection;
@@ -41,9 +52,9 @@ class Database
     {
         $query = "
             CREATE TABLE IF NOT EXISTS orders (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                customer_name TEXT NOT NULL,
-                total_price REAL NOT NULL
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                customer_name VARCHAR(100) NOT NULL,
+                total_price DECIMAL(10,2) NOT NULL
             )
         ";
         self::$connection->exec($query);
