@@ -1,22 +1,24 @@
 <?php
-namespace Classes\Oop;
 
-require_once __DIR__ . '/Logger.php';
+declare(strict_types=1);
+require_once 'Logger.php';
 
 /**
- * App
+ * Class App
  * 
- * Represents an application that uses dependency injection of Logger.
+ * Aplikasi yang menerima logger sebagai dependency.
  */
 class App
 {
-    /** @var Logger $logger Logger instance */
+    /**
+     * @var Logger Logger yang digunakan
+     */
     private Logger $logger;
 
     /**
-     * Constructor
-     * 
-     * @param Logger $logger Logger instance (FileLogger or ConsoleLogger)
+     * App constructor.
+     *
+     * @param Logger $logger Objek turunan dari Logger
      */
     public function __construct(Logger $logger)
     {
@@ -24,14 +26,12 @@ class App
     }
 
     /**
-     * Run the application and write logs at different stages.
-     * 
+     * Menjalankan aplikasi.
+     *
      * @return void
      */
     public function run(): void
     {
-        $this->logger->log("Application started");
-        $this->logger->log("Doing some work...");
-        $this->logger->log("Application finished");
+        $this->logger->log("Aplikasi berjalan...");
     }
 }

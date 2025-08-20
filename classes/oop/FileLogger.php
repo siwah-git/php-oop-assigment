@@ -1,37 +1,38 @@
 <?php
-namespace Classes\Oop;
 
-require_once __DIR__ . '/Logger.php';
+declare(strict_types=1);
+require_once 'Logger.php';
 
 /**
- * FileLogger
+ * Class FileLogger
  * 
- * Concrete implementation of Logger that writes log messages into a file.
+ * Menyimpan pesan log ke dalam file logs.txt.
  */
 class FileLogger extends Logger
 {
-    /** @var string $filePath Path to the log file */
+    /**
+     * @var string Path ke file log
+     */
     private string $filePath;
 
     /**
-     * Constructor
-     * 
-     * @param string $filePath Path to the log file
+     * FileLogger constructor.
+     *
+     * @param string $filePath Path file tempat menyimpan log
      */
-    public function __construct(string $filePath)
+    public function __construct(string $filePath = 'data/logs.txt')
     {
         $this->filePath = $filePath;
     }
 
     /**
-     * Write a log message to file.
-     * 
-     * @param string $message Message to log
+     * Menulis pesan ke file log.
+     *
+     * @param string $message Pesan log
      * @return void
      */
     public function log(string $message): void
     {
-        $formatted = $this->format($message) . PHP_EOL;
-        file_put_contents($this->filePath, $formatted, FILE_APPEND | LOCK_EX);
+        file_put_contents($this->filePath, $message . PHP_EOL, FILE_APPEND);
     }
 }

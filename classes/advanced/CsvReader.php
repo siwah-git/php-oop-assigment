@@ -1,29 +1,72 @@
 <?php
-class CsvReader{
-    public $filePath;
-    public $header = [];
-    public function __construct($filePath){
+
+declare(strict_types=1);
+
+/**
+ * Class CsvReader
+ * 
+ * Membaca file CSV dan mengembalikan data sebagai array asosiatif.
+ */
+class CsvReader
+{
+    /**
+     * @var string Path ke file CSV
+     */
+    private string $filePath;
+
+    /**
+     * CsvReader constructor.
+     *
+     * @param string $filePath Lokasi file CSV
+     */
+    public function __construct(string $filePath)
+    {
         $this->filePath = $filePath;
     }
-    public function getHeader(){
-        if (empty($this->header)){
-            if (($handle = fopen($this->filePath,"r")) !== FALSE) {
-                $this->header = fgetcsv($handle);
-                fclose($handle);
-            }
+
+    /**
+     * Mengambil header dari file CSV (baris pertama).
+     *
+     * @return array Header sebagai array string
+     */
+    public function getHeader(): array
+    {
+        $file = fopen($this->filePath, 'r');
+        if (!$file) {
+            throw new RuntimeException("File tidak bisa dibuka: {$this->filePath}");
         }
-        return $this->header;
+
+        $header = fgetcsv($file);
+        fclose($file);
+
+        return $header !== false ? $header : [];
     }
-    public function getRows(){
-        $rows = [];
-        $header = $this->getHeader();
-        if (($handle=fopen($this->filePath, "r"))!==FALSE){
-            fgetcsv($handle);
-            while (($data = fgetcsv($handle))!==FALSE){
-                $rows[]=array_combine($header,$data);
-            }
-            fclose($handle);
+
+    /**
+     * Mengambil semua baris setelah header sebagai array asosiatif.
+     *
+     * @return array Array data dari file CSV
+     */
+    public function getRows(): array
+    {
+        $file = fopen($this->filePath, 'r');
+        if (!$file) {
+            throw new RuntimeException("File tidak bisa dibuka: {$this->filePath}");
         }
+
+        $header = fgetcsv($file);
+        if ($header === false) {
+            fclose($file);
+            return [];
+        }
+
+        $rows = [];
+
+        while (($data = fgetcsv($file)) !== false) {
+            $rows[] = array_combine($header, $data);
+        }
+
+        fclose($file);
         return $rows;
     }
 }

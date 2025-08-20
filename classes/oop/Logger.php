@@ -1,31 +1,19 @@
 <?php
-namespace Classes\Oop;
+
+declare(strict_types=1);
 
 /**
- * Abstract class Logger
+ * Class Logger (abstract)
  * 
- * Base class for logging system. 
- * Provides abstract method log() that must be implemented in child classes.
+ * Abstraksi untuk sistem pencatatan log.
  */
 abstract class Logger
 {
     /**
-     * Abstract method for logging a message.
-     * 
-     * @param string $message Message to log
+     * Menulis pesan log.
+     *
+     * @param string $message Pesan yang ingin dicatat
      * @return void
      */
     abstract public function log(string $message): void;
-
-    /**
-     * Format a log message with timestamp.
-     * 
-     * @param string $message Message to format
-     * @return string Formatted log message with timestamp
-     */
-    protected function format(string $message): string
-    {
-        $time = date('Y-m-d H:i:s');
-        return "[$time] $message";
-    }
 }

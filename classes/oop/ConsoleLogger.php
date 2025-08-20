@@ -1,23 +1,23 @@
 <?php
-namespace Classes\Oop;
 
-require_once __DIR__ . '/Logger.php';
+declare(strict_types=1);
+require_once 'Logger.php';
 
 /**
- * ConsoleLogger
+ * Class ConsoleLogger
  * 
- * Concrete implementation of Logger that prints log messages to the output.
+ * Menampilkan pesan log ke layar (output).
  */
 class ConsoleLogger extends Logger
 {
     /**
-     * Print a log message to the output.
-     * 
-     * @param string $message Message to log
+     * Menampilkan pesan ke output.
+     *
+     * @param string $message Pesan log
      * @return void
      */
     public function log(string $message): void
     {
-        echo $this->format($message) . "<br>";
+        echo $message . PHP_EOL;
     }
 }

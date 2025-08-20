@@ -1,6 +1,6 @@
-id,name,age
-1,Resty,20
-2,Siwah,21
-3,Sinta,22
-4,Indah,23
-5,Ria,24
+name,age,score
+Resty,20,80
+Siwah,21,90
+Sinta,22,88
+Indah,23,89
+Ria,24,90

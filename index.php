@@ -1,51 +1,41 @@
 <?php
-// ===== Load Classes =====
 
-// CsvReader
-require_once __DIR__ . '/classes/advanced/CsvReader.php';
+declare(strict_types=1);
 
-// PrimeGenerator
-require_once __DIR__ . '/classes/basics/PrimeGenerator.php';
+// === Autoload semua class dari folder ===
+spl_autoload_register(function ($class) {
+    $folders = ['classes/basics', 'classes/advanced', 'classes/oop', 'classes/database'];
+    foreach ($folders as $folder) {
+        $file = $folder . '/' . $class . '.php';
+        if (file_exists($file)) {
+            require_once $file;
+            return;
+        }
+    }
+});
 
-// Logger System
-require_once __DIR__ . '/classes/oop/FileLogger.php';
-require_once __DIR__ . '/classes/oop/ConsoleLogger.php';
-require_once __DIR__ . '/classes/oop/App.php';
+// === Contoh pemanggilan class ===
+echo "=== Prime Generator ===\n";
+$prime = new PrimeGenerator(20);
+print_r($prime->generate());
 
+echo "\n=== CSV Reader ===\n";
+$csv = new CsvReader('data/students.csv');
+print_r($csv->getHeader());
+print_r($csv->getRows());
 
-// ===== PrimeGenerator Example =====
-echo "<h2>Prime Generator Example</h2>";
-
-$primeGen = new PrimeGenerator();
-$primes = $primeGen->generatePrimes(20); // primes up to 20
-print_r($primeGen->generatePrimes());
-
-echo "<pre>";
-print_r($primes);
-echo "</pre>";
-
-// ===== CsvReader Example =====
-echo "<h2>CSV Reader Example</h2>";
-
-$csv = new CsvReader(__DIR__ . "/data/students.csv");
-
-echo "<pre>";
-print_r($csv->getHeader()); // print header
-print_r($csv->getRows());   // print rows as associative array
-echo "</pre>";
-
-// ===== Logger System Example =====
-echo "<h2>Logger System Example</h2>";
-
-// ConsoleLogger
-echo "<h3>Console Logger</h3>";
-$appConsole = new App(new ConsoleLogger());
-$appConsole->run();
-
-// FileLogger
-echo "<h3>File Logger</h3>";
-$logFile = __DIR__ . '/data/logs.txt';
-$appFile = new App(new FileLogger($logFile));
+echo "\n=== Logger System ===\n";
+$fileLogger = new FileLogger('data/logs.txt');
+$appFile = new App($fileLogger);
 $appFile->run();
 
-echo "<p>Check <code>data/logs.txt</code> for file logs.</p>";
+$consoleLogger = new ConsoleLogger();
+$appConsole = new App($consoleLogger);
+$appConsole->run();
+
+echo "\n=== Order Management ===\n";
+$orderRepo = new OrderRepository();
+$orderRepo->createOrder("Andi", 150000);
+$orderRepo->createOrder("Budi", 200000);
+echo "Total Orders: " . $orderRepo->getTotalOrders() . PHP_EOL;
+echo "Average Order Value: Rp " . number_format($orderRepo->getAverageOrderValue(), 0, ',', '.') . PHP_EOL;
