@@ -1,35 +1,65 @@
 <?php
-class PrimeGenerator {
-   public $limit; // to store the upper limit
 
-   //receives the limit number
-   public function __construct($limit){
-    $this->limit = $limit;
-   }
+declare(strict_types=1);
 
-   //method to check if a number is prime 
-   public function isPrime($number){
-    if ($number < 2 ) return false; //number less than 2 are not prime
-    for ($i = 2; $i <= sqrt($number); $i++){
-        if ($number % $i ==0) {
-            return false; //not prime
-        }
+/**
+ * Class PrimeGenerator
+ * 
+ * Menghasilkan bilangan prima hingga nilai batas tertentu.
+ */
+class PrimeGenerator
+{
+    /**
+     * @var int Batas maksimum bilangan prima
+     */
+    private int $limit;
+
+    /**
+     * PrimeGenerator constructor.
+     *
+     * @param int $limit Batas atas untuk mencari bilangan prima
+     */
+    public function __construct(int $limit)
+    {
+        $this->limit = $limit;
     }
-   return true; // number is prime
-}
 
-// method to generate all prime numbers up to the limit
-    public function generate() {
-    $primes = [];
-    for ($i = 2; $i <= $this ->limit; $i++){
-        if ($this->isPrime($i)){
-            $primes[] = $i; //add prime number to the array
+    /**
+     * Menghasilkan array bilangan prima hingga batas.
+     *
+     * @return int[] Array bilangan prima
+     */
+    public function generate(): array
+    {
+        $primes = [];
+
+        for ($i = 2; $i <= $this->limit; $i++) {
+            if ($this->isPrime($i)) {
+                $primes[] = $i;
+            }
         }
-    }
-    return $primes;
-}
-}
 
-$prime = new PrimeGenerator(20);
-print_r($prime->generate());
-?>
+        return $primes;
+    }
+
+    /**
+     * Mengecek apakah sebuah bilangan adalah bilangan prima.
+     *
+     * @param int $number Angka yang akan dicek
+     * @return bool True jika prima, false jika tidak
+     */
+    public function isPrime(int $number): bool
+    {
+        if ($number < 2) {
+            return false;
+        }
+
+        for ($i = 2; $i <= sqrt($number); $i++) {
+            if ($number % $i === 0) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
