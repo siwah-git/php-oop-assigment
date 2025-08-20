@@ -2,7 +2,14 @@
 
 declare(strict_types=1);
 
-// === Autoload semua class dari folder ===
+/**
+ * The main entry point of the application.
+ * This file uses an autoloader to dynamically include class files.
+ *
+ * @author Gemini
+ */
+
+// === Autoload all classes from the specified folders ===
 spl_autoload_register(function ($class) {
     $folders = ['classes/basics', 'classes/advanced', 'classes/oop', 'classes/database'];
     foreach ($folders as $folder) {
@@ -14,7 +21,7 @@ spl_autoload_register(function ($class) {
     }
 });
 
-// === Contoh pemanggilan class ===
+// === Class call examples ===
 echo "=== Prime Generator ===\n";
 $prime = new PrimeGenerator(20);
 print_r($prime->generate());
@@ -27,11 +34,11 @@ print_r($csv->getRows());
 echo "\n=== Logger System ===\n";
 $fileLogger = new FileLogger('data/logs.txt');
 $appFile = new App($fileLogger);
-$appFile->run();
+$appFile->run('Application started.');
 
 $consoleLogger = new ConsoleLogger();
 $appConsole = new App($consoleLogger);
-$appConsole->run();
+$appConsole->run('Application is running.');
 
 echo "\n=== Order Management ===\n";
 $orderRepo = new OrderRepository();
