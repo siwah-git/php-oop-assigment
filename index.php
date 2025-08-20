@@ -69,7 +69,7 @@ try {
 }
 echo "<br>";
 
-echo "=== Shape ===". PHP_EOL . "<br>";
+echo "=== Bentuk ===". PHP_EOL . "<br>";
 $shapes = [
     new Box(5),
     new Triangle(6, 7),
@@ -80,3 +80,18 @@ foreach ($shapes as $shape){
     echo get_class($shape). "luas: ". $shape->getArea(). "\n";
 }
 echo "<br>";
+
+echo "=== User ===". PHP_EOL . "<br>";
+$db = new Database();
+$userRepo = new UserRepository($db);
+
+$userRepo->createUser ("Siti Wahyuni", "Siwah@gmail.com");
+$userRepo->createUser ("Dwi Resty", "DwiResty@gmail.com");
+$userRepo->createUser ("Sinta ", "Sinta@gmail.com");
+
+$users = $userRepo->getAllUsers();
+
+echo "====user=====";
+foreach ($users as $users) {
+    echo "nama : " . $user['nama'] . "email : " . $user['nama'];
+}
