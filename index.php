@@ -41,7 +41,8 @@ $appConsole->run('Application is running.');
 
 echo "\n=== Order Management ===\n";
 $orderRepo = new OrderRepository();
-$orderRepo->createOrder("Andi", 150000);
-$orderRepo->createOrder("Budi", 200000);
+$orderRepo->createOrder("Resty", 150000);
+$orderRepo->createOrder("Siwah", 200000);
+$orderRepo->createOrder("Sinta", 300000);
 echo "Total Orders: " . $orderRepo->getTotalOrders() . PHP_EOL;
 echo "Average Order Value: Rp " . number_format($orderRepo->getAverageOrderValue(), 0, ',', '.') . PHP_EOL;
