@@ -23,17 +23,15 @@ class Database
     {
         if (self::$connection === null) {
             $host = 'localhost';
-            $dbname = 'oop_assignment'; // pastikan sudah dibuat
-            $username = 'root';         // sesuaikan
-            $password = '';             // sesuaikan
+            $dbname = 'oop_assignment'; 
+            $username = 'root';         
+            $password = '';            
 
             $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8mb4";
 
             try {
                 self::$connection = new \PDO($dsn, $username, $password);
                 self::$connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-
-                // Buat tabel jika belum ada
                 self::initSchema();
             } catch (\PDOException $e) {
                 die("Koneksi database gagal: " . $e->getMessage());
@@ -44,7 +42,7 @@ class Database
     }
 
     /**
-     * Inisialisasi schema tabel orders jika belum ada.
+     * 
      *
      * @return void
      */
