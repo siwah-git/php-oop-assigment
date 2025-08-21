@@ -102,7 +102,7 @@ echo "<br>";
 echo "=== pengguna email ===" . PHP_EOL . "<br>";
 $user1 = $userRepo->findByEmail("Siwah@gmail.com");
 if ($user1) {
-    echo "pengguna dengan email : Siwah@gmail.com ditemukan" .  $user1['nama'] . PHP_EOL;
+    echo "pengguna dengan email : Siwah@gmail.com ditemukan" .   $user1['nama'] . PHP_EOL;
 }
 
 echo "<br>";

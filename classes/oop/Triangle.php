@@ -3,17 +3,17 @@
 require_once "PlannerShapes.php";
 
 class Triangle extends PlannerShapes{
-    private $alas;
-    private $tinggi;
+    private $base;
+    private $heigth;
 
 
-    public function __construct($alas, $tinggi){
-        $this->alas = $alas;
-        $this->tinggi = $tinggi;
+    public function __construct($base, $heigth){
+        $this->base = $base;
+        $this->heigth = $heigth;
     } 
 
     public function getArea(){
-        return 0.5 * $this->alas * $this->tinggi ;
+        return 0.5 * $this->base  *  $this->heigth = $heigth ;
     }
 }
 ?>
