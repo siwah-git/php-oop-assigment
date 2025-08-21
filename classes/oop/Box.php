@@ -2,14 +2,14 @@
  require_once "PlannerShapes.php";
 
  class Box extends PlannerShapes{
-    private $sisi;
+    private $side;
 
-    public function __construct ($sisi) {
-        $this->sisi = $sisi;
+    public function __construct ($side) {
+        $this->side = $side;
     }
 
     public function getArea(){
-        return $this->sisi * $this->sisi;
+        return $this->side * $this->side;
     }
  }
 

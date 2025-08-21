@@ -4,7 +4,7 @@ class Storage {
     public $file; 
 
 
-//method untuk constructo menerima file.txt
+//method untuk constructor menerima file.txt
 public function __construct(string $file) {
     $this->file = $file;
 

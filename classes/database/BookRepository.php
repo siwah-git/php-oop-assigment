@@ -1,56 +1,63 @@
 <?php
-
-
+/**
+ * Class UserRepository
+ * Handles data access logic for orders.
+ * This is a simulation, as no real database connection is established.
+ *
+ * @package Classes\Database
+ *
+ */
 class BookRepository {
-    public $connsql;
-
-    public function __construct(mysqli  $connsql) {//construc menerima koneksi dari mysql
-        $this->connsql; 
+    /**
+     * @var array An array to simulate a database table for orders.
+     */
+    private array $books = [];
+   
+    /**
+     * Creates a new order entry.
+     *
+     * @param string $title judul buku.
+     * @param string $author penulis.
+     * @param string $year tahun terbit
+     * @return void
+     */
+    public function createBook(string $title, string $author, string $year): void {
+        $id = count($this->books) + 1;
+        $this->books[] = [
+            'id' => $id,
+            'title' => $title,
+            'author' => $author,
+            'year' => $year
+        ];
+        echo "Book created for {$title} with ID {$id}." . PHP_EOL;
     }
 
-    //membuat data buku baru berdasarkan title, author dan year
-    public function createBook(string $title, string $author, int $year): bool {
-        $sql = "INSERT INTO book (title, author, year) VALUES (?,?,?)";
-        $statement = $this->connsql->prepare($sql);
-        if (!$statement) {
-            die("Prepare failed:" . $this->connsql->error);
+    /**
+     * Calculates the average value of all orders.
+     *
+     * @return string The average order value.
+     */
+    public function findByAuthor(string $author): ?array {
+        foreach ($this->books as $books) {
+            if ($books['author'] === $author ) {
+                return $books;
+            }
         }
-        $statement->bind_param("ssi", $title, $author, $year);
-        return $statement->execute();
-
+        return null;
     }
 
-    //mencari buku erdasarkan author
-    public function findBookByAuthor(string $author): array {
-        $sql = "SELECT * FROM book WHERE author = ?";
-        $statement = $this->connsql->prepare($sql);
-        if(!$statement) {
-            die("Prepare failed: " . $this->connsql->error);
+    /**
+     * Calculates the average value of all orders.
+     *
+     * @return string The average order value.
+     */
+    public function deleteById(int $id): ?array {
+        foreach ($this->books as $books) {
+            if ($books['id'] === $id ) {
+                return $books;
+            }
         }
-        $statement->bind_param("s", $author);
-        $statement->execute();
-        $result = $statement->get_result();
-
-        $books = [];
-        while ($row = $result->fetch_assoc()) {
-            $books[] = $row;
-        }
-        return $books;
+        return null;
     }
-
-
-    //menghapus buku berdasarkan id buku
-
-    public function deleteBook(int $id): bool {
-        $sql = "DELETE FROM book WHERE id = ?";
-        $statement = $this->connsql->prepare($sql);
-        if (!$statement) {
-            die("Prepare failed: " .  $this->connsql->error);
-
-        }
-        $statement->bind_param("i", $id);
-        return $statement->execute();
-    }
-
 }
-?>
+
