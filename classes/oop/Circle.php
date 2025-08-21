@@ -1,26 +1,30 @@
 <?php
 
- /** 
-  * Used to calculate the area of a circle
-  * @var float $radius circle radius
- */
+    /** 
+     * Used to calculate the area of a circle
+    * @var float $radius circle radius
+    */
 
 class Circle extends PlannerShapes {
     private $radius;
+
+    /**
+     * Constructs a new Circle instance
+     * @param float $radius of the circle.
+     */
 
    public function  __construct($radius) {
     $this->radius = $radius;
 }
 
-/**
- * Method Executes the FizzBuzz logic and returns the results.
- * @return array An array containing the FizzBuzz results
- */
+    /**
+     *  Calculates and returns the area of ​​the circle
+     * @return float The area of ​​the circle.
+     */
 
     public function getArea(){
     return pi() * pow($this->radius, 2); 
 }
 }
-
 
 ?>
