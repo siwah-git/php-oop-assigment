@@ -104,9 +104,10 @@ echo "<br>";
 echo "=== pengguna email ===" . PHP_EOL . "<br>";
 $user1 = $userRepo->findByEmail("Siwah@gmail.com");
 if ($user1) {
-    echo "pengguna dengan email : Siwah@gmail.com ditemukan" .  $user1['nama'] . "<br>";
+
     echo "pengguna dengan email : Siwah@gmail.com ditemukan" .   $user1['nama'] . PHP_EOL;
 }
+echo "<br>";
 echo "<br>";
 //menjalankan array transformer
 
@@ -136,8 +137,8 @@ echo "=== JSON Mapper ===". PHP_EOL . "<br>";
 $user = __DIR__ . DIRECTORY_SEPARATOR . 'config.json';
 
 $user = '{
-    "name": "Siwah",
-    "age": 22,
+    "user.name": "Siwah",
+    "user.age": 22,
     "addres": {
       "city": "Surakarta"
     }
