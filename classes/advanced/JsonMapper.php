@@ -6,7 +6,11 @@ class JsonMapper {
 
 //method
 public function __construct(string $user){
-    $this->data = json_decode($user, true); // constructor menerima string data JSON
+    $this->data = json_decode($user, true);// constructor menerima string data JSON
+    
+    if ($this->data === null) {
+        echo "<pre>JSON Error: " . json_last_error_msg() . "</pre>";
+    }
 
 }
 
@@ -15,17 +19,18 @@ public function getKeys() : array {
 
 }
 //method yang hanya dipakai internal class atau tidak bisa public
+
 private function extractKeys(array $array, string $prefix = ''): array {
-    $key = [];
+    $keys = [];
     foreach ($array as $key => $value) {
         $fullKey = $prefix === '' ? $key : $prefix . '.' . $key;
         $keys[] = $fullKey;
         if (is_array($value)) {
-            $key = array_merge($key, $this->extractKeys($value, $fullKey));
+            $keys = array_merge($keys, $this->extractKeys($value, $fullKey));
         }
     }
 
-    return $key;
+    return $keys; //mengembalikan variabel keys
 }
 //method untuk mengubah JSON nested menjadi array 1 dimensi (dengan prefix untuk menggabungkan dengan tanda titik)
 public function flatten(): array {
