@@ -1,30 +1,26 @@
 <?php
 /**
  * Class CsvReader
- * Reads a CSV file and processes its data.
- *
+ * Membaca file CSV dan memproses datanya.
  * @package Classes\Advanced
- *
  */
 class CsvReader {
     /**
-     * @var string The path to the CSV file.
+     * @var string Jalur (path) ke file CSV.
      */
     private string $filePath;
 
     /**
      * CsvReader constructor.
-     *
-     * @param string $filePath The path to the CSV file.
+     * @param string $filePath Jalur (path) ke file CSV.
      */
     public function __construct(string $filePath) {
         $this->filePath = $filePath;
     }
 
     /**
-     * Gets the header row of the CSV file.
-     *
-     * @return array The header row as an array of strings.
+     * Mendapatkan baris header dari file CSV.
+     * @return array Baris header sebagai array string.
      */
     public function getHeader(): array {
         if (!file_exists($this->filePath)) {
@@ -37,28 +33,27 @@ class CsvReader {
     }
 
     /**
-     * Gets all data rows of the CSV file as an associative array.
-     *
-     * @return array An array of associative arrays, where each array represents a row.
+     * Mendapatkan semua baris data dari file CSV sebagai array.
+     * @return array setiap array merepresentasikan satu baris.
      */
-    public function getRows(): array {
+    public function getRows(): array { //membaca seluruh baris data dari file CSV
         if (!file_exists($this->filePath)) {
             return [];
         }
         $rows = [];
-        $file = fopen($this->filePath, 'r');
-        $header = fgetcsv($file); // Read the header
+        $file = fopen($this->filePath, 'r'); //fopen untuk buka file dalam mode baca 'r'
+        $header = fgetcsv($file); // Baca header
         if (!$header) {
-            fclose($file);
+            fclose($file); // menutup file
             return [];
         }
 
-        while (($data = fgetcsv($file)) !== false) {
+        while (($data = fgetcsv($file)) !== false) { // baca setiap baris sampai habis
             $row = [];
-            foreach ($header as $key => $column) {
-                $row[trim($column)] = $data[$key];
+            foreach ($header as $key => $column) { // baris diubah menjadi array
+                $row[trim($column)] = $data[$key]; // trim hapus space kosong
             }
-            $rows[] = $row;
+            $rows[] = $row; // baris yang sudah diiubah dikembalikan ke Rows
         }
 
         fclose($file);
