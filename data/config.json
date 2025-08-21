@@ -1,0 +1,10 @@
+{
+  "user": {
+    "name": "Siwah",
+    "age": 22,
+    "addres": {
+      "city": "Surakarta"
+    }
+  },
+  "active": true
+}

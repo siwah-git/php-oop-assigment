@@ -95,3 +95,78 @@ echo "====user=====";
 foreach ($users as $users) {
     echo "nama : " . $user['nama'] . "email : " . $user['nama'];
 }
+
+//menjalankan array transformer
+
+echo "=== Array Transformer ===". PHP_EOL . "<br>";
+
+$data = [1,2,3,4,5];
+$transformer = new ArrayTransformer($data); // constructor menerima data berisi angka
+
+echo "Angka Asli : ";
+echo "<pre>" . print_r ($data, true) . "</pre>"; //menampilkan data asli
+
+echo "Kuadrat : ";
+echo "<pre>" . print_r ($transformer->mapSquare($data), true) . "</pre>";//menampilakn  kuadrat disetiap angka yang muncul
+
+echo "Genap : ";
+echo "<pre>" . print_r ($transformer->filterEven($data), true) . "</pre>";//menampilka angka genap saja
+
+echo "Total :";
+echo $transformer->sum($transformer);//menjumlahkan semua angka
+
+echo "=== JSON Mapper ===". PHP_EOL . "<br>";
+
+$user = file_get_contents('config.json');
+
+$usermapper = new JsonMapper($user); 
+
+echo "semua key:\n";
+print_r($usermapper->getKeys());
+
+echo "\nJSON Flatten:\n";
+print_r($usermapper->flatten());
+
+echo "=== Data Storage ===". PHP_EOL . "<br>";
+
+$storage = new Storage("user.txt"); //membuat storage dengan file txt
+//membuat user
+$user1 = new User ("Siti Wahyuni", "siwa2323@gmail.com");
+$user2 = new User ("Sinta Febriyanti", "sinta1212@gmail.com");
+$user3 = new User ("Dwi Resty Kartika", "resty3434@gmail.com");
+
+$user1-> saveToStorage($storage);//menyimpan user ke storage
+$user2-> saveToStorage($storage);
+$user3-> saveToStorage($storage);
+
+echo "Isi dari file user/.txt:\n";
+print_r($storage->readAll());
+
+echo "=== Book Reposytory ===". PHP_EOL . "<br>";
+
+//koneksi dengan mySQLi
+$connsql = new mysqli("localhost","root","","testdb");
+
+//mengecek koneksi
+if ($connsql->connect_error) {
+    die("koneksi gagal:" . $connsql->connect_error);
+}
+
+//inisialisasi repository
+$repository = new BookRepository($connesql);
+
+//menambahkan buku baru
+$repository->createBook("Bumi","Tere Liye",2014);
+$repository->createBook("Laut Bercerita", "Leila S.Chudori", 2017);
+
+//mencari buku berdasarkan author
+$books = $repository->findBookByAuthor("Tere Liye");
+print_r($books);
+
+//menghapus buku dengan id 1
+$repository->deleteBook(1);
+
+$connesql->close();
+
+
+
