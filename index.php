@@ -104,7 +104,11 @@ echo "<br>";
 echo "=== pengguna email ===" . PHP_EOL . "<br>";
 $user1 = $userRepo->findByEmail("Siwah@gmail.com");
 if ($user1) {
+<<<<<<< HEAD
     echo "pengguna dengan email : Siwah@gmail.com ditemukan" .  $user1['nama'] . "<br>";
+=======
+    echo "pengguna dengan email : Siwah@gmail.com ditemukan" .   $user1['nama'] . PHP_EOL;
+>>>>>>> 07bcc72a72254d219a1178da1cafb9a966b046b2
 }
 echo "<br>";
 //menjalankan array transformer

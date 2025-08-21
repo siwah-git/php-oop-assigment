@@ -16,18 +16,18 @@ class UserRepository {
     /**
      * Creates a new order entry.
      *
-     * @param string $nama Nama pengguna.
+     * @param string $name Nama pengguna.
      * @param string $email Email pengguna.
      * @return void
      */
-    public function createUser(string $nama, string $email): void {
+    public function createUser(string $name, string $email): void {
         $id = count($this->users) + 1;
         $this->users[] = [
             'id' => $id,
-            'nama' => $nama,
+            'nama' => $name,
             'email' => $email,
         ];
-        echo "User created for {$nama} with ID {$id}." . PHP_EOL;
+        echo "User created for {$name} with ID {$id}." . PHP_EOL;
     }
 
     /** 

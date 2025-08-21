@@ -75,7 +75,13 @@ Application started.
 Application started.
 >>>>>>> 43e682c907962e2f6c7dc185f0078ae306492eda
 Application started.
+<<<<<<< HEAD
+Application started.
+Application started.
+Application started.
+=======
 >>>>>>> 9ca849fd9661ae663a9467aff8d45e26b9fd02ab
+<<<<<<< HEAD
 Application started.
 Application started.
 Application started.
@@ -117,6 +123,9 @@ Application started.
 Application started.
 Application started.
 Application started.
+=======
+>>>>>>> 2e435a8fc7a805d61270e6a750139097f799d836
+>>>>>>> 07bcc72a72254d219a1178da1cafb9a966b046b2
 Application started.
 Application started.
 Application started.
