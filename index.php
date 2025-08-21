@@ -63,9 +63,10 @@ echo "=== Word Counter ===". PHP_EOL . "<br>";
 try {
     $counter = new WordCounter ("data/sample.txt");
     echo "jumlah kata : " . $counter->countWords() . PHP_EOL;
+    echo "<br>";
     echo "kata yang paling banyak muncul : " .$counter->mostFrequentWord() . PHP_EOL;
 } catch (Exception $e) {
-    echo "ERROR : " . $e->getMessage(); //akan muncul pesan eror jika gagal memuat data
+    echo "ERROR : " . $e->getMessage(); 
 }
 echo "<br>";
 
@@ -77,21 +78,39 @@ $shapes = [
 ];
 
 foreach ($shapes as $shape){
-    echo get_class($shape). "luas: ". $shape->getArea(). "\n";
+    echo get_class($shape).  " luas: ".  $shape->getArea().  "<br>";
 }
 echo "<br>";
 
 echo "=== User ===". PHP_EOL . "<br>";
-$db = new Database();
-$userRepo = new UserRepository($db);
+$userRepo = new UserRepository();
 
 $userRepo->createUser ("Siti Wahyuni", "Siwah@gmail.com");
 $userRepo->createUser ("Dwi Resty", "DwiResty@gmail.com");
 $userRepo->createUser ("Sinta ", "Sinta@gmail.com");
 
-$users = $userRepo->getAllUsers();
+echo PHP_EOL;
 
-echo "====user=====";
-foreach ($users as $users) {
-    echo "nama : " . $user['nama'] . "email : " . $user['nama'];
+echo "<br>";
+
+echo "=== pengguna ===" . PHP_EOL . "<br>";
+$allUsers = $userRepo->getAllUsers();
+echo "Jumlah pengguna: " .count($allUsers) .PHP_EOL;
+echo "<br>";
+echo "Daftar semua penguna: " .PHP_EOL;
+print_r($allUsers);
+
+echo "<br>";
+
+echo "=== pengguna email ===" . PHP_EOL . "<br>";
+$user1 = $userRepo->findByEmail("Siwah@gmail.com");
+if ($user1) {
+    echo "pengguna dengan email : Siwah@gmail.com ditemukan" .  $user1['nama'] . PHP_EOL;
+}
+
+echo "<br>";
+
+$user2 = $userRepo->findByEmail("Ria@gmail.com");
+if ($user2 == null) {
+    echo "pengguna dengan email : Ria@gmail.com tidak ditemukan" . PHP_EOL;
 }

@@ -1,25 +1,56 @@
 <?php
-
+/**
+ * Class UserRepository
+ * Handles data access logic for orders.
+ * This is a simulation, as no real database connection is established.
+ *
+ * @package Classes\Database
+ *
+ */
 class UserRepository {
-    private $db;
+    /**
+     * @var array An array to simulate a database table for orders.
+     */
+    private array $users = [];
 
-    public function __construct(Database $database){
-        $this->db = $database->connect();
+    /**
+     * Creates a new order entry.
+     *
+     * @param string $nama Nama pengguna.
+     * @param string $email Email pengguna.
+     * @return void
+     */
+    public function createUser(string $nama, string $email): void {
+        $id = count($this->users) + 1;
+        $this->users[] = [
+            'id' => $id,
+            'nama' => $nama,
+            'email' => $email,
+        ];
+        echo "User created for {$nama} with ID {$id}." . PHP_EOL;
     }
 
-    public function createUser($name, $email){
-        $sql = "INSERT INTO users (nama, email) VALUES ('$name', '$email')";
-        return $this->$db->query($sql);
+    /** 
+     * Calculates the total number of orders.
+     *
+     * @return array The .
+     */
+    public function getAllUsers(): array {
+        return $this->users;
     }
 
-    public function getAllUsers() {
-        $result =$this->$db->query("SELECT * FROM users");
-        return $result ->fetch_all(MYSQLI_ASSOC);
-    }
-
-    public function findByEmail($email) {
-         $result =$this->$db->query("SELECT * FROM users WHERE email = '$email'");
-         return $result ->fetch_assoc;
+    /**
+     * Calculates the average value of all orders.
+     *
+     * @return string The average order value.
+     */
+    public function findByEmail(string $email): ?array {
+        foreach ($this->users as $user) {
+            if ($user['email'] === $email ) {
+                return $user;
+            }
+        }
+        return null;
     }
 }
-?>
+
