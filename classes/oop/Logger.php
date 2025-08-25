@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 /**
  * Class Logger (abstract)
- * 
- * Abstraksi untuk sistem pencatatan log.
+ * * An abstraction for a logging system.
  */
 abstract class Logger
 {
     /**
-     * Menulis pesan log.
+     * Writes a log message.
      *
-     * @param string $message Pesan yang ingin dicatat
+     * @param string $message The message to be logged.
      * @return void
      */
     abstract public function log(string $message): void;

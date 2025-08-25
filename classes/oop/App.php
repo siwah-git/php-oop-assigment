@@ -1,33 +1,33 @@
 <?php
+
 /**
  * Class App
- * Merepresentasikan logika utama aplikasi
- * @package Classes\OOP
- *
+ * Represents the main application logic.
  */
 class App {
+
     /**
-     * @var Logger Instansi logger yang akan digunakan.
-     * harus selalu berupa objek dari kelas Logger atau kelas apa pun yang mewarisinya
+     * An instance of the logger to be used.
+     * @var Logger
      */
     private Logger $logger;
 
     /**
      * App constructor.
      *
-     * @param Logger $logger Sebuah instansi dari kelas yang mewarisi Logger.
+     * @param Logger $logger An instance of a class that inherits from Logger.
      */
     public function __construct(Logger $logger) {
         $this->logger = $logger;
     }
 
     /**
-     * Menjalankan proses utama aplikasi.
+     * Runs the main application process.
      *
-     * @param string $message Sebuah pesan yang akan dicatat.
+     * @param string $message A message to be logged.
      * @return void
      */
-    public function run(string $message): void { // melakukan "sesuatu" dan kemudian mencatat peristiwa tersebut.
-        $this->logger->log($message); //memanggil metode log() dari objek $this->logger.
+    public function run(string $message): void {
+        $this->logger->log($message);
     }
 }

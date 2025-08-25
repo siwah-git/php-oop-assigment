@@ -1,59 +1,76 @@
 <?php
 /**
  * Class CsvReader
- * Membaca file CSV dan memproses datanya.
- * @package Classes\Advanced
+ * Reads and processes data from a CSV file.
  */
 class CsvReader {
+
     /**
-     * @var string Jalur (path) ke file CSV.
+     * The file path to the CSV.
+     * @var string
      */
     private string $filePath;
 
     /**
      * CsvReader constructor.
-     * @param string $filePath Jalur (path) ke file CSV.
+     *
+     * @param string $filePath The path to the CSV file.
      */
     public function __construct(string $filePath) {
         $this->filePath = $filePath;
     }
 
     /**
-     * Mendapatkan baris header dari file CSV.
-     * @return array Baris header sebagai array string.
+     * Gets the header row from the CSV file.
+     *
+     * @return array The header row as an array of strings.
      */
     public function getHeader(): array {
-        if (!file_exists($this->filePath)) {
+        if (!file_exists($this->filePath) || !is_readable($this->filePath)) {
             return [];
         }
+
         $file = fopen($this->filePath, 'r');
+        if ($file === false) {
+            return [];
+        }
+        
         $header = fgetcsv($file);
         fclose($file);
-        return $header ?: [];
+        
+        return $header ? array_map('trim', $header) : [];
     }
 
     /**
-     * Mendapatkan semua baris data dari file CSV sebagai array.
-     * @return array setiap array merepresentasikan satu baris.
+     * Gets all data rows from the CSV file as an array.
+     *
+     * @return array An array where each element represents a row.
      */
-    public function getRows(): array { //membaca seluruh baris data dari file CSV
-        if (!file_exists($this->filePath)) {
-            return [];
-        }
-        $rows = [];
-        $file = fopen($this->filePath, 'r'); //fopen untuk buka file dalam mode baca 'r'
-        $header = fgetcsv($file); // Baca header
-        if (!$header) {
-            fclose($file); // menutup file
+    public function getRows(): array {
+        if (!file_exists($this->filePath) || !is_readable($this->filePath)) {
             return [];
         }
 
-        while (($data = fgetcsv($file)) !== false) { // baca setiap baris sampai habis
-            $row = [];
-            foreach ($header as $key => $column) { // baris diubah menjadi array
-                $row[trim($column)] = $data[$key]; // trim hapus space kosong
+        $rows = [];
+        $file = fopen($this->filePath, 'r');
+        if ($file === false) {
+            return [];
+        }
+
+        $header = fgetcsv($file);
+        if (!$header) {
+            fclose($file);
+            return [];
+        }
+        
+        $trimmedHeader = array_map('trim', $header);
+
+        while (($data = fgetcsv($file)) !== false) {
+            if (count($data) !== count($trimmedHeader)) {
+                // Skips inconsistent rows or handles them as needed.
+                continue;
             }
-            $rows[] = $row; // baris yang sudah diiubah dikembalikan ke Rows
+            $rows[] = array_combine($trimmedHeader, $data);
         }
 
         fclose($file);

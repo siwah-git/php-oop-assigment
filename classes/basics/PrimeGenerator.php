@@ -1,28 +1,31 @@
 <?php
+
 /**
  * Class PrimeGenerator
- * Menghasilkan dan memeriksa bilangan prima hingga batas tertentu.
- * @package Classes\Basics
+ * Generates and checks for prime numbers up to a given limit.
  */
 class PrimeGenerator {
+
     /**
-     * @var int Batas atas untuk menghasilkan bilangan prima.
+     * The upper limit for generating prime numbers.
+     * @var int
      */
     private int $limit;
 
     /**
      * PrimeGenerator constructor.
-     * @param int $limit Batas atas yang akan ditetapkan.
+     *
+     * @param int $limit The upper limit to be set.
      */
     public function __construct(int $limit) {
         $this->limit = $limit;
     }
 
     /**
-     * Memeriksa apakah sebuah angka adalah bilangan prima.
+     * Checks if a number is a prime number.
      *
-     * @param intAngka yang akan diperiksa.
-     * @return bool True jika angka tersebut prima, false sebaliknya.
+     * @param int $number The number to check.
+     * @return bool True if the number is prime, false otherwise.
      */
     public function isPrime(int $number): bool {
         if ($number <= 1) {
@@ -37,8 +40,8 @@ class PrimeGenerator {
     }
 
     /**
-     * * Menghasilkan array semua bilangan prima hingga batas yang ditetapkan.
-     * @return array Array yang berisi semua bilangan prima.
+     * Generates an array of all prime numbers up to the set limit.
+     * @return array An array containing all prime numbers.
      */
     public function generate(): array {
         $primes = [];
