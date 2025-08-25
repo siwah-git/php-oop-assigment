@@ -5,32 +5,32 @@ require_once 'Logger.php';
 
 /**
  * Class FileLogger
- * Menyimpan pesan log ke dalam file logs.txt.
+ * Saves log messages to a file named logs.txt.
  */
-class FileLogger extends Logger
-{
+class FileLogger extends Logger {
+
     /**
-     * @var string Path ke file log
+     * @var string Path to the log file.
      */
     private string $filePath;
 
     /**
      * FileLogger constructor.
-     * @param string $filePath Path file tempat menyimpan log
+     * @param string $filePath The path to the file where logs will be stored.
      */
-    public function __construct(string $filePath = 'data/logs.txt') //jika membuat objek FileLogger tanpa memberikan argumen, ia akan secara otomatis menggunakan file logs.txt di dalam folder data.
-    {
+    public function __construct(string $filePath = 'data/logs.txt') {
+        // If an object is created without an argument, it defaults to 'data/logs.txt'.
         $this->filePath = $filePath;
     }
 
     /**
-     * Menulis pesan ke file log.
-     * @param string $message Pesan log
+     * Writes a message to the log file.
+     * @param string $message The log message.
      * @return void
      */
-    public function log(string $message): void
-    {
-        file_put_contents($this->filePath, $message . PHP_EOL, FILE_APPEND); //menulis data ke sebuah file.
-        // FILE_APPEND konten baru akan ditambahkan di akhir file, sehingga semua pesan log akan tersimpan.
+    public function log(string $message): void {
+        // Writes new content to the file. FILE_APPEND ensures new messages are added
+        // at the end, preserving all log history.
+        file_put_contents($this->filePath, $message . PHP_EOL, FILE_APPEND);
     }
 }

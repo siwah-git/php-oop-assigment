@@ -1,32 +1,40 @@
 <?php
-
 /**
- * class Triangle to calculate the area of ​​a triangular shape
- * @var float height of the triangle.
- * @var float base length of the triangle.
- * 
+ * Class Triangle
+ * Represents a triangle shape and calculates its area.
  */
-class Triangle extends PlannerShapes{
+class Triangle extends PlannerShapes
+{
+    /**
+     * @var float The base length of the triangle.
+     */
     private $base;
+
+    /**
+     * @var float The height of the triangle.
+     */
     private $height;
 
     /**
-     * Constructs a new Triangle instance.
-     * 
-     * @param base $base of the triangle
-     * @param height $height of the tiangle 
+     * Triangle constructor.
+     *
+     * @param float $base   The base length of the triangle.
+     * @param float $height The height of the triangle.
      */
-
-    public function __construct($base, $height){
+    public function __construct(float $base, float $height)
+    {
         $this->base = $base;
         $this->height = $height;
-    } 
+    }
 
     /**
-     *  Calculates and returns the area of ​​the triangle
+     * Calculates and returns the area of the triangle.
+     *
+     * @return float The area of the triangle.
      */
-    public function getArea(){
-        return 0.5 * $this->height * $this->base;
+    public function getArea(): float
+    {
+        return 0.5 * $this->base * $this->height;
     }
 }
 ?>
