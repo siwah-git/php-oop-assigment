@@ -1,53 +1,59 @@
 <?php
 
 /**
- * Class WordCounter
- * Used to count words and find the most frequently occurring words
- * from the contents of a text file
- * @var string path to file
- * @var string string Content of a text file.
+ * WordCounter
+ * 
+ * Reads a text file, counts its words, and finds the most frequent word.
  */
 class WordCounter {
-    private $filepath;
-    private $content;
+    /**
+     * Path to the text file.
+     * @var string
+     */
+    private string $filepath;
 
     /**
-     * Constructs a new WordCounter instance.
-     *
-     * @param string $filepath The path to the text file.
-     * @throws Exception If the file does not exist or cannot be read.
+     * The contents of the text file.
+     * @var string
      */
+    private string $content;
 
-    public function __construct ($filepath){
+    /**
+     * Create a new WordCounter instance.
+     * 
+     * @param string $filepath Full path to the text file.
+     * @throws Exception If the file does not exist.
+     */
+    public function __construct(string $filepath) {
         $this->filepath = $filepath;
-    if (!file_exists($filepath)) {
-        throw new Exception ("file tidak ditemukan : " . $filepath);
-    }
 
-    $this->content = file_get_contents($filepath);
+        if (!file_exists($filepath)) {
+            throw new Exception("File not found: " . $filepath);
+        }
+
+        $this->content = file_get_contents($filepath);
     }
 
     /**
-     * Counts the total number of words in the file.
-     * @return int The total word count.
+     * Count all words in the text file.
+     * 
+     * @return int Total number of words.
      */
-
-    public function countWords(): int{
+    public function countWords(): int {
         $words = str_word_count(strtolower($this->content), 1);
-        return count ($words);
-}
+        return count($words);
+    }
 
-    public function mostFrequentWord(): string {                // Method to find the most frequently occurring words
+    /**
+     * Get the most frequent word in the text file.
+     * 
+     * @return string The word that appears most often.
+     */
+    public function mostFrequentWord(): string {
         $words = str_word_count(strtolower($this->content), 1);
-    
-        $frequency = array_count_values($words);                // count the frequency of each word
+        $frequency = array_count_values($words);
+        arsort($frequency);
 
-        arsort($frequency) ;                                    // sort from largest to smallest then take the first one
-        $mostFrequent = array_key_first($frequency);
-
-        return $mostFrequent;
-
+        return array_key_first($frequency);
     }
 }
-
-?>

@@ -1,47 +1,63 @@
 <?php
 
-class FizzBuzz
-{
+/**
+ * FizzBuzz
+ * 
+ * Generates a FizzBuzz sequence with customizable words.
+ */
+class FizzBuzz {
     /**
-     *  @var int $limit to determine the limit value
-     *  @var string $fizzWord for words used to replace multiples of 3
-     *  @var string $buzzword for words used to replace multiples of 5
-     * 
+     * The upper limit of the sequence.
+     * @var int
      */
-    public $limit; 
-    public $fizzWord;
-    public $buzzword;
+    public int $limit;
 
     /**
-     * Constructor to initialize the FizzBuzz property
-     * @param int $limit the limit number for the loop.
-     * @param string $fizzWord the word for multiples of 3
-     * @param string $buzzword the word for multiples of 5
+     * The word to use instead of "Fizz".
+     * @var string
      */
-    public function __construct($limit, $fizzWord, $buzzWord)
-    {
+    public string $fizzWord;
+
+    /**
+     * The word to use instead of "Buzz".
+     * @var string
+     */
+    public string $buzzWord;
+
+    /**
+     * Create a new FizzBuzz generator.
+     * 
+     * @param int $limit Maximum number to generate.
+     * @param string $fizzWord Replacement word for multiples of 3.
+     * @param string $buzzWord Replacement word for multiples of 5.
+     */
+    public function __construct(int $limit, string $fizzWord, string $buzzWord) {
         $this->limit = $limit;
         $this->fizzWord = $fizzWord;
-        $this->buzzword = $buzzWord;
+        $this->buzzWord = $buzzWord;
     }
+
     /**
-     * Method Executes the FizzBuzz logic and returns the results.
-     * @return array An array containing the FizzBuzz results
+     * Generate the FizzBuzz sequence.
+     * 
+     * @return array<int|string> The sequence as an array.
      */
-    function run() : array {
-        $array =[];                              //empty array to hold the results
-        for ($i = 1; $i <= $this->limit; $i++) { 
-            if ($i % 3 == 0 && $i % 5 == 0) {   //if multiples of 3 & 5 print then the combination of both.
-                $array[] = $this->fizzWord . $this->buzzword;
-            } elseif ($i % 3 == 0) {            //multiples of 3 print $fizzWord
-                $array[] = $this->fizzWord;
-            } elseif ($i % 5 == 0) {
-                $array[] = $this->buzzword;     //If multiple of 5 print $buzzWord
+    public function run(): array {
+        $result = [];
+
+        for ($i = 1; $i <= $this->limit; $i++) {
+            if ($i % 3 === 0 && $i % 5 === 0) {
+                $result[] = $this->fizzWord . $this->buzzWord;
+            } elseif ($i % 3 === 0) {
+                $result[] = $this->fizzWord;
+            } elseif ($i % 5 === 0) {
+                $result[] = $this->buzzWord;
             } else {
-                $array[] = $i;
+                $result[] = $i;
             }
         }
-        return $array;
+
+        return $result;
     }
 }
 
