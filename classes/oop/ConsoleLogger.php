@@ -1,17 +1,17 @@
 <?php
 /**
  * Class ConsoleLogger
- * Sebuah kelas untuk mencatat pesan ke konsol.
- * Diterima langsung melalui metode log().
- * @package Classes\OOP
+ * 
+ * A class for logging messages to the console.
  */
 class ConsoleLogger extends Logger {
     /**
-     * Mencatat sebuah pesan ke konsol.
-     * @param string $message Pesan yang akan dicatat.
+     * Logs a message to the console.
+     * 
+     * @param string $message The message to be logged.
      * @return void
      */
-    public function log(string $message): void { // mengambil sebuah pesan dan menampilkannya di konsol.
+    public function log(string $message): void {
         echo "[LOG] " . $message . PHP_EOL;
     }
 }

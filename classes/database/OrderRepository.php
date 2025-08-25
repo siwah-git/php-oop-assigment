@@ -1,43 +1,45 @@
 <?php
+
 /**
  * Class OrderRepository
- * Menangani logika akses data untuk pesanan.
- * @package Classes\Database
+ * Handles the data access logic for orders.
  */
 class OrderRepository {
+
     /**
-     * @var array sebuah array untuk mensimulasikan tabel database untuk pesanan.
+     * An array to simulate a database table for orders.
+     * @var array
      */
     private array $orders = [];
 
     /**
-     * Membuatpesanan baru.
+     * Creates a new order and adds it to the simulated database.
      *
-     * @param string $customer Nama pelanggan.
-     * @param float $total Total harga pesanan.
-     * @return void
+     * @param string $customer The customer's name.
+     * @param float $total The total price of the order.
+     * @return int The ID of the newly created order.
      */
-    public function createOrder(string $customer, float $total): void { // membuat pesanan baru dan menambahkannya ke "database" simulasi.
-        $id = count($this->orders) + 1; // untuk menyimpan dan mengelola data pesanan
-        $this->orders[] = [ //
+    public function createOrder(string $customer, float $total): int {
+        $id = count($this->orders) + 1;
+        $this->orders[] = [
             'id' => $id,
             'customer_name' => $customer,
             'total_price' => $total,
         ];
-        echo "Order created for {$customer} with ID {$id}." . PHP_EOL;
+        return $id;
     }
 
     /**
-     * Menghitung jumlah total pesanan.
-     * @return int Jumlah total pesanan.
+     * Calculates the total number of orders.
+     * @return int The total number of orders.
      */
     public function getTotalOrders(): int {
-        return count($this->orders); // menghitung berapa banyak pesanan yang ada di dalam array $this->orders
+        return count($this->orders);
     }
 
     /**
-     * Menghitung nilai rata-rata dari semua pesanan.
-     * @return float Nilai rata-rata pesanan.
+     * Calculates the average value of all orders.
+     * @return float The average order value.
      */
     public function getAverageOrderValue(): float {
         if (empty($this->orders)) {
@@ -49,6 +51,6 @@ class OrderRepository {
             $totalPrice += $order['total_price'];
         }
 
-        return $totalPrice / count($this->orders); // mengembalikan total harga dibagi dengan jumlah total pesanan, menghasilkan nilai rata-rata.
+        return $totalPrice / count($this->orders);
     }
 }
