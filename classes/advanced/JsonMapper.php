@@ -4,9 +4,13 @@ class JsonMapper {
     public $data; 
 
 
-//method
+/**
+ * Undocumented function
+ *
+ * @param string $user
+ */
 public function __construct(string $user){
-    $this->data = json_decode($user, true);// constructor menerima string data JSON
+    $this->data = json_decode($user, true);// constructor accepts JSON data string
     
     if ($this->data === null) {
         echo "<pre>JSON Error: " . json_last_error_msg() . "</pre>";
@@ -15,10 +19,13 @@ public function __construct(string $user){
 }
 
 public function getKeys() : array {
-    return $this->extractKeys($this->data); // method untuk mengambil kunci
+    return $this->extractKeys($this->data); // method to retrieve the key
 
 }
-//method yang hanya dipakai internal class atau tidak bisa public
+
+/**
+ * @param string $name
+ */
 
 private function extractKeys(array $array, string $prefix = ''): array {
     $keys = [];
@@ -30,9 +37,13 @@ private function extractKeys(array $array, string $prefix = ''): array {
         }
     }
 
-    return $keys; //mengembalikan variabel keys
+    return $keys; //returns the keys variable
 }
-//method untuk mengubah JSON nested menjadi array 1 dimensi (dengan prefix untuk menggabungkan dengan tanda titik)
+/**
+ * Undocumented function
+ *
+ * @return array
+ */
 public function flatten(): array {
     return $this->flattenArray($this->data);
     }
