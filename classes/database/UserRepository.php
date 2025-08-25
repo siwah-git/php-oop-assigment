@@ -1,7 +1,7 @@
 <?php
 /**
  * Class UserRepository
- * Handles data access logic for orders.
+ * Handles data access logic for users.
  * This is a simulation, as no real database connection is established.
  *
  * @package Classes\Database
@@ -33,7 +33,7 @@ class UserRepository {
     /** 
      * Calculates the total number of orders.
      *
-     * @return array The .
+     * @return array 
      */
     public function getAllUsers(): array {
         return $this->users;
